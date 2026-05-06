@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-app-deployment
+  labels:
+    app: my-go-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: my-go-app
+  template:
+    metadata:
+      labels:
+        app: my-go-app
+    spec:
+      containers:
+      - name: go-container
+        image: my-go-app:v1
+        imagePullPolicy: Never # Crucial for local development with Colima
+        ports:
+        - containerPort: 8080
